@@ -1,0 +1,6 @@
+# Pin the rule set so a newer ruff can't suddenly add checks and fail the build.
+line-length = 120
+
+[lint]
+# E = style errors, F = real mistakes (unused imports, undefined names)
+select = ["E4", "E7", "E9", "F"]

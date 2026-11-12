@@ -1,0 +1,25 @@
+# --- The web server ---
+fastapi                  
+uvicorn[standard]        
+python-multipart         
+pydantic                 
+pydantic-settings        
+email-validator          
+
+# --- The database ---
+sqlalchemy               
+alembic                  
+psycopg2-binary          
+
+# --- Login and safety ---
+pyjwt                    
+argon2-cffi              
+slowapi                  
+
+# --- The AI parts ---
+chromadb                 
+PyMuPDF  
+python-docx                
+rank-bm25               
+httpx                    
+

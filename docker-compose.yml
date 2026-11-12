@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: accument
+      POSTGRES_PASSWORD: accument
+      POSTGRES_DB: accument
+    volumes:
+      - pgdata:/var/lib/postgresql/data   
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U accument"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data                      
+    extra_hosts:
+      - "host.docker.internal:host-gateway"  
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 6s
+      retries: 12
+      start_period: 20s
+
+  frontend:
+    build: ./frontend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "8501:8501"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  pgdata:

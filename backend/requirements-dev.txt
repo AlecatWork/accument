@@ -1,0 +1,3 @@
+-r requirements.txt      # everything above, plus:
+pytest                   # runs automatic checkers
+ruff                     # tidies code and catches silly mistakes

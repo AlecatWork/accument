@@ -1,0 +1,17 @@
+{
+  "paper_title": "widget-learning",
+  "items": [
+    {"id": 1, "question": "What is the main idea of the paper?", "must_include": ["widget", "500"], "page": 1},
+    {"id": 2, "question": "Who is the author?", "must_include": ["Ada Example"], "page": 1},
+    {"id": 3, "question": "What year was it written?", "must_include": ["2024"], "page": 1},
+    {"id": 4, "question": "How many labeled diagrams are used?", "must_include": ["500"], "page": 1},
+    {"id": 5, "question": "How many layers does the encoder have?", "must_include": ["3"], "page": 2},
+    {"id": 6, "question": "What learning rate is used?", "must_include": ["0.001"], "page": 2},
+    {"id": 7, "question": "What is the batch size?", "must_include": ["16"], "page": 2},
+    {"id": 8, "question": "What accuracy is reported?", "must_include": ["91.5"], "page": 3},
+    {"id": 9, "question": "What is a limitation?", "must_include": ["English"], "page": 3},
+    {"id": 10, "question": "Does the paper mention Mars colonies?", "must_include": ["can't find"], "page": null},
+    {"id": 11, "question": "What dataset split is used for the score?", "must_include": ["test"], "page": 3},
+    {"id": 12, "question": "What kind of labels are on the diagrams?", "must_include": ["caption"], "page": 2}
+  ]
+}

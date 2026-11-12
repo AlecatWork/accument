@@ -1,0 +1,11 @@
+.env
+data/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.venv/
+.DS_Store
+backend/evals/last_report.json
+.vscode/
+.idea/
