@@ -16,6 +16,34 @@
 
 ---
 
+
+## Project layout
+
+```
+accument/
+├── docker-compose.yml      three boxes: db, backend, frontend
+├── .env.example            copy to .env
+├── backend/
+│   ├── app/
+│   │   ├── api/            the endpoints (auth, papers, chat, notes, compare, summaries, stats, health)
+│   │   ├── core/           database, models, schemas, security
+│   │   ├── repositories/   all database reading and writing lives here
+│   │   └── services/       file parsing, chunking, search, the AI writer, ingestion
+│   ├── alembic/            database change log (001, 002, 003)
+│   ├── evals/              search and answer quality checks
+│   ├── scripts/            demo data
+│   └── tests/              unit and API tests
+├── frontend/
+│   ├── Home.py             the menu and Log out button
+│   ├── views/              one file per page
+│   └── api_client.py       the only file that talks to the backend
+└── docs/screenshots/       images used in this README
+```
+
+
+
+---
+
 ## Architecture
 
 Accument is three programs that start together (Docker Compose), plus Ollama, which runs directly on your Mac. Think of a restaurant: the **website** is the dining room, the **backend** is the kitchen, the **database** is the pantry, and **Ollama** is the chef.
@@ -62,7 +90,7 @@ flowchart LR
 
 **1. Get the code and open its folder.**
 ```bash
-git clone <your-repository-url> accument
+git clone https://github.com/AlecatWork/accument.git
 cd accument
 ```
 
@@ -307,36 +335,3 @@ docker compose exec db psql -U accument -c "select avg(latency_ms), avg(completi
 | The first answer takes a long time | Normal on an older laptop: the model is waking up. A smaller model in `MODEL_NAME` is faster still |
 | `pytest: command not found`, or an `httpx2` error | The toolbox isn't switched on: run `source .venv/bin/activate`, and use `python -m pytest` |
 | Red underlines in VS Code | Command Palette → *Python: Select Interpreter* → choose the one inside `.venv` |
-
-## Project layout
-
-```
-accument/
-├── docker-compose.yml      three boxes: db, backend, frontend
-├── .env.example            copy to .env
-├── backend/
-│   ├── app/
-│   │   ├── api/            the endpoints (auth, papers, chat, notes, compare, summaries, stats, health)
-│   │   ├── core/           database, models, schemas, security
-│   │   ├── repositories/   all database reading and writing lives here
-│   │   └── services/       file parsing, chunking, search, the AI writer, ingestion
-│   ├── alembic/            database change log (001, 002, 003)
-│   ├── evals/              search and answer quality checks
-│   ├── scripts/            demo data
-│   └── tests/              unit and API tests
-├── frontend/
-│   ├── Home.py             the menu and Log out button
-│   ├── views/              one file per page
-│   └── api_client.py       the only file that talks to the backend
-└── docs/screenshots/       images used in this README
-```
-
-## Glossary
-
-- **API:** the set of "order forms" the website uses to talk to the backend.
-- **Chunk:** a small, overlapping piece of a paper (about 900 characters).
-- **Embedding:** a list of numbers that captures what a sentence *means*.
-- **JWT / token:** a signed wristband you receive at login and show with every request.
-- **Migration:** a saved change to the database's layout.
-- **Streaming:** sending the answer as it is written instead of waiting for all of it.
-- **Token (AI):** a word-piece; roughly three quarters of a word.
